@@ -3,6 +3,9 @@ import java.awt.*;
 
 public class PuzzleProject extends JFrame {
 
+    private final JButton [] buttons = new JButton[16];
+    private final int[] tiles = new int[16];
+
     public PuzzleProject() {
         super("Puzzle Project");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -14,11 +17,15 @@ public class PuzzleProject extends JFrame {
         gridPanel.setLayout (new GridLayout(4,4,5,5));
 
         for ( int i = 1; i <= 15; i++ ) {
-            gridPanel.add( new JButton(String.valueOf(i)));
+            JButton b = new JButton(String.valueOf(i));
+            buttons[i-1] = b;
+            gridPanel.add(b);
 
 
         }
-        gridPanel.add( new JButton(""));   // empty tile
+        JButton empty = new JButton("");
+        buttons[15] = empty;
+        gridPanel.add(empty);
         add(gridPanel, BorderLayout.CENTER);
 
         setVisible(true);
