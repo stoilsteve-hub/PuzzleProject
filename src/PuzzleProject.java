@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class PuzzleProject extends JFrame {
-    private static final int SIZE = 4;
-    private static final int TILE_COUNT = SIZE * SIZE;
+    private static final int GRID_SIZE = 4;
+    private static final int TILE_COUNT = GRID_SIZE * GRID_SIZE;
     private final JButton[] buttons = new JButton[TILE_COUNT];
     private final int[] tiles = new int[TILE_COUNT];
 
@@ -17,7 +17,7 @@ public class PuzzleProject extends JFrame {
         setSize(400, 400);
         setLocationRelativeTo(null);
 
-        JPanel grid = new JPanel(new GridLayout(SIZE, SIZE, 5, 5));
+        JPanel grid = new JPanel(new GridLayout(GRID_SIZE, GRID_SIZE, 5, 5));
 
         // Fill the board in solved order
         for (int i = 0; i < TILE_COUNT - 1; i++) {
@@ -75,10 +75,10 @@ public class PuzzleProject extends JFrame {
 
     // check next to each other
     private boolean isNextToEmpty(int index, int empty) {
-        if (index == empty - 1 && empty % SIZE != 0) return true;  // left
-        if (index == empty + 1 && index % SIZE != 0) return true;  // right
-        if (index == empty - SIZE) return true;                    // above
-        if (index == empty + SIZE) return true;                    // below
+        if (index == empty - 1 && empty % GRID_SIZE != 0) return true;  // left
+        if (index == empty + 1 && index % GRID_SIZE != 0) return true;  // right
+        if (index == empty - GRID_SIZE) return true;                    // above
+        if (index == empty + GRID_SIZE) return true;                    // below
         return false;
     }
 
