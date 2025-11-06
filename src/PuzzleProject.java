@@ -37,7 +37,7 @@ public class PuzzleProject extends JFrame {
 
         //New Game button addition
         JPanel controls = new JPanel();
-        JButton newGameButton = new JButton("New Game");
+        JButton newGameButton = new JButton("Start/Refresh Game");
         controls.add(newGameButton);
         add(controls, BorderLayout.SOUTH);
 
