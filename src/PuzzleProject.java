@@ -35,7 +35,7 @@ public class PuzzleProject extends JFrame {
 
         add(grid, BorderLayout.CENTER);
 
-        //New Game button addition
+        //New button addition
         JPanel controls = new JPanel();
         JButton newGameButton = new JButton("Start/Refresh Game");
         controls.add(newGameButton);
@@ -43,20 +43,21 @@ public class PuzzleProject extends JFrame {
 
         newGameButton.addActionListener(e -> shuffle());
 
-        // make sure texts are in sync (safe)
+        //texts are in sync
         refreshAllButtons();
 
         setVisible(true);
     }
 
+    //checks if clicked tile can move and swaps it with empty
     private void moveTile(int index) {
         int empty = findEmpty();
-        if (isNextToEmpty(index, empty)) {
+        if (isNextToEmpty(index, empty)) { //swap if next to empty
             int temp = tiles[index];
             tiles[index] = tiles[empty];
             tiles[empty] = temp;
 
-            // update only the two buttons that changed
+            // UI update only the two buttons that changed
             buttons[index].setText(tiles[index] == 0 ? "" : String.valueOf(tiles[index]));
             buttons[empty].setText(tiles[empty] == 0 ? "" : String.valueOf(tiles[empty]));
 
@@ -66,6 +67,7 @@ public class PuzzleProject extends JFrame {
         }
     }
 
+    //return array index of empty tile
     private int findEmpty() {
         for (int i = 0; i < TILE_COUNT; i++) {
             if (tiles[i] == 0) return i;
@@ -73,7 +75,7 @@ public class PuzzleProject extends JFrame {
         return -1;
     }
 
-    // check next to each other
+    // check if next to each other
     private boolean isNextToEmpty(int index, int empty) {
         if (index == empty - 1 && empty % GRID_SIZE != 0) return true;  // left
         if (index == empty + 1 && index % GRID_SIZE != 0) return true;  // right
@@ -82,6 +84,7 @@ public class PuzzleProject extends JFrame {
         return false;
     }
 
+    //button labels to match tile numbers
     private void refreshAllButtons() {
         for (int i = 0; i < TILE_COUNT; i++) {
             buttons[i].setText(tiles[i] == 0 ? "" : String.valueOf(tiles[i]));
@@ -95,8 +98,8 @@ public class PuzzleProject extends JFrame {
         for (int i = 0; i < TILE_COUNT; i++) tiles[i] = list.get(i);
         refreshAllButtons();
     }
+    // positions 0..14 must be 1..15, and the last must be 0
     private boolean isSolved() {
-        // positions 0..14 must be 1..15, and the last must be 0
         for (int i = 0; i < TILE_COUNT - 1; i++) {
             if (tiles[i] != i + 1) return false;
         }
